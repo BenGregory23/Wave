@@ -10,7 +10,7 @@ export default class DrawWorld{
     constructor(world : World, context : CanvasRenderingContext2D){
         this.world = world;
         // set font 
-        context.font = "30px Arial";
+        context.font = "14px Sans-serif";
         // set text color
         context.fillStyle = "white";
 
@@ -34,7 +34,7 @@ export default class DrawWorld{
                
 
                 // clear the tile
-                context.fillStyle = "black";
+                context.fillStyle = "#303033";
                 context.fillRect(x * 32, y * 32, 32, 32);
                 const tileEntropy = this.world.getEntropy(x, y);
                 const tileType = this.world.getType(x, y);
@@ -42,21 +42,18 @@ export default class DrawWorld{
                 
                 if(tileEntropy > 0){
                  
-                    if(tileEntropy == 27){
-                        context.fillStyle = "darkgrey";
-                        context.fillText(tileEntropy.toString(), x * 32, y * 32 + 30);
+                    if(tileEntropy == 35){
+                        context.fillStyle = "#454545";
+                        context.fillText(tileEntropy.toString(), x * TILESIZE, y * TILESIZE + TILESIZE, TILESIZE);
                     }else if(tileEntropy >= 10){ 
                         context.fillStyle = "grey";
-                        context.fillText(tileEntropy.toString(), x * 32, y * 32 + 30);
+                        context.fillText(tileEntropy.toString(), x * TILESIZE, y * TILESIZE + TILESIZE, TILESIZE);
                     }
                     else if(tileEntropy < 10){
-                        if(tileEntropy == lowestEntropy){
-                            context.fillStyle = "green";
-                            context.fillText(tileEntropy.toString(), x * 32, y * 32 + 30);
-                        }else{
+                       
                             context.fillStyle = "white";
-                            context.fillText(tileEntropy.toString(), x * 32, y * 32 + 30);
-                        }
+                            context.fillText(" " + tileEntropy.toString(), x * TILESIZE, y * 16 + TILESIZE, 16);
+                        
                     }
                 }
                 else if(TileTypeConstantToNumber(tileType.tileType) > TILE_FORESTN){ // Forest needs a grass tile to be drawn first

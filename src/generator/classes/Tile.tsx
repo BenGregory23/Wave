@@ -96,9 +96,7 @@ export default class Tile {
             }
 
            
-            console.log("I am ", this.x,this.y, "my tileRules are: ",this.possibilities)
-            console.log("neighbourPossibilities: ",neighbourPossibilities)
-            
+        
 
             this.possibilities.forEach(possibility => {
                 const possibleNeighbors = tileRules[possibility];
@@ -125,10 +123,7 @@ export default class Tile {
             });
 
             
-            this.entropy = this.possibilities.length;
-
-
-            console.log("AFTER filtering possibilities: ",this.possibilities)
+            this.entropy = this.possibilities.length    
         }
 
         return reduced;

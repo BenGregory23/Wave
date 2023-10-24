@@ -1,11 +1,11 @@
 export const spriteSheetPath = "src/assets/tileset.png"
 
 // World size in tiles
-export const WORLD_X = 30
-export const WORLD_Y = 17
+export const WORLD_X = 60
+export const WORLD_Y = 34
 
 // Tile size in pixels
-export const TILESIZE = 32
+export const TILESIZE = 16
 
 // Directions
 export const NORTH = 0
@@ -192,7 +192,7 @@ export const tileRules: {[key: string]: number[]} = {
 
 export const tileWeights : {[key : string] : number} = {
     TILE_GRASS    : 16,
-    TILE_WATER    : 4,
+    TILE_WATER    : 6,
     TILE_FOREST   : 5,
     TILE_COASTN   : 5,
     TILE_COASTE   : 5,
@@ -228,12 +228,11 @@ export const tileWeights : {[key : string] : number} = {
     TILE_ROCKNW   : 4,
 }
 
+export const ModifyTileWeights = (tileType : string, value : number) => {
+    tileWeights[tileType] = Number(value)
+}
 
-// IF THIS IS GETTING REMOVED THEN YOU ARE GOING TO FAR WITH CTRL Z
-// BUFFER FOR CTRL Z
-// BUFFER FOR CTRL Z
-// BUFFER FOR CTRL Z
-// BUFFER FOR CTRL Z
+
 
 
 // make an array with objects having a key and a value

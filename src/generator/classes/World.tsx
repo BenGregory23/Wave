@@ -1,6 +1,6 @@
 import Tile from "./Tile";
 import Stack from "./Stack";
-import { NORTH, EAST,SOUTH,WEST, tileRules } from "../config";
+import { NORTH, EAST,SOUTH,WEST, tileRules, ModifyTileWeights} from "../config";
 
 
 export default class World{
@@ -143,6 +143,50 @@ export default class World{
             }
         }
         return false
+    }
+
+   
+
+    public setForestWeight(increase: number){
+        ModifyTileWeights("TILE_FOREST", increase)
+        ModifyTileWeights("TILE_FORESTN", increase)
+        ModifyTileWeights("TILE_FORESTE", increase)
+        ModifyTileWeights("TILE_FORESTS", increase)
+        ModifyTileWeights("TILE_FORESTW", increase)
+        ModifyTileWeights("TILE_FORESTNE", increase)
+        ModifyTileWeights("TILE_FORESTSE", increase)
+        ModifyTileWeights("TILE_FORESTSW", increase)
+        ModifyTileWeights("TILE_FORESTNW", increase)
+        ModifyTileWeights("TILE_FORESTNE2", increase)
+        ModifyTileWeights("TILE_FORESTSE2", increase)
+        ModifyTileWeights("TILE_FORESTSW2", increase)
+
+    }
+
+    public setWaterWeight(increase: number){
+      
+        ModifyTileWeights("TILE_WATER", increase)
+        if(increase > 80) {
+            ModifyTileWeights("TILE_COAST", 0)
+          
+        }
+    }
+
+    public setGrassWeight(increase: number){
+        ModifyTileWeights("TILE_GRASS", increase)
+    }
+
+    public setRockWeight(increase: number){
+        ModifyTileWeights("TILE_ROCKN", increase)
+        ModifyTileWeights("TILE_ROCKE", increase)
+        ModifyTileWeights("TILE_ROCKS", increase)
+        ModifyTileWeights("TILE_ROCKW", increase)
+        ModifyTileWeights("TILE_ROCKNE", increase)
+        ModifyTileWeights("TILE_ROCKSE", increase)
+        ModifyTileWeights("TILE_ROCKSW", increase)
+        ModifyTileWeights("TILE_ROCKNW", increase)
+
+
     }
 
     public isFinished(): boolean{
