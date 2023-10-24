@@ -229,6 +229,12 @@ export const tileWeights : {[key : string] : number} = {
 }
 
 
+// IF THIS IS GETTING REMOVED THEN YOU ARE GOING TO FAR WITH CTRL Z
+// BUFFER FOR CTRL Z
+// BUFFER FOR CTRL Z
+// BUFFER FOR CTRL Z
+// BUFFER FOR CTRL Z
+
 
 // make an array with objects having a key and a value
 export const tileSprites = [

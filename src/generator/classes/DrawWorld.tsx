@@ -24,14 +24,14 @@ export default class DrawWorld{
     }
 
  
-    public async update(context : CanvasRenderingContext2D){
+    public update(context : CanvasRenderingContext2D){
         const lowestEntropy = this.world.getLowestEntropy();
        
 
         for(let y = 0; y < WORLD_Y; y++){
             for(let x = 0; x < WORLD_X; x++){
             
-                //await new Promise(r => setTimeout(r, 0));
+               
 
                 // clear the tile
                 context.fillStyle = "black";
@@ -39,8 +39,9 @@ export default class DrawWorld{
                 const tileEntropy = this.world.getEntropy(x, y);
                 const tileType = this.world.getType(x, y);
 
-               
+                
                 if(tileEntropy > 0){
+                 
                     if(tileEntropy == 27){
                         context.fillStyle = "darkgrey";
                         context.fillText(tileEntropy.toString(), x * 32, y * 32 + 30);
@@ -58,25 +59,31 @@ export default class DrawWorld{
                         }
                     }
                 }
+                else if(TileTypeConstantToNumber(tileType.tileType) > TILE_FORESTN){ // Forest needs a grass tile to be drawn first
+                   
+                    const pos = this.getTileSprite({ tileType: 'TILE_GRASS' });
+                    
+                    const pos2 = this.getTileSprite(tileType);
+                    if (pos === undefined || pos2 === undefined) {
+                        console.error('getTileSprite returned undefined for tileType:', tileType);
+                    } else {
+                        context.drawImage(this.spriteSheet, pos[0], pos[1], 16, 16, x * TILESIZE, y * TILESIZE, TILESIZE, TILESIZE);
+                        context.drawImage(this.spriteSheet, pos2[0], pos2[1], 16, 16, x * TILESIZE, y * TILESIZE, TILESIZE, TILESIZE);
+                    }
+                }
+                // so if tile has a type
                 else if(TileTypeConstantToNumber(Object.keys(tileType)[0]) < TILE_FORESTN){
-                    
-                    
                     const pos = this.getTileSprite(tileType);
                     if (pos === undefined) {
                         console.error('getTileSprite returned undefined for tileType:', tileType);
                     } else {
-                        context.drawImage(this.spriteSheet, pos[0], pos[1], TILESIZE, TILESIZE, x * TILESIZE, y * TILESIZE, TILESIZE, TILESIZE);
+                        context.drawImage(this.spriteSheet, pos[0], pos[1], 16, 16, x * TILESIZE, y * TILESIZE, TILESIZE, TILESIZE);
+
                     }
                 }
-                else{ // Forest needs a grass tile to be drawn first
-                    console.error("forest")
-                    const pos = this.getTileSprite({ tileType: 'TILE_GRASS' });
-                    context.drawImage(this.spriteSheet, pos[0], pos[1], TILESIZE, TILESIZE, x * TILESIZE, y * TILESIZE, TILESIZE, TILESIZE);
-                    const pos2 = this.getTileSprite(tileType);
-                    context.drawImage(this.spriteSheet, pos2[0], pos2[1], TILESIZE, TILESIZE, x * TILESIZE, y * TILESIZE, TILESIZE, TILESIZE);
-                }
+               
 
-
+                
                 if(tileEntropy == 0){
                     // and tile possiblities are 0
                     if(this.world.getTile(x,y).getPossibilities().length == 0){
@@ -85,18 +92,10 @@ export default class DrawWorld{
                     context.fillText(" *", x * 32, y * 32 + 30);
                     }
                 }
-
-       
-               
-
             }
         }
     }
 
-    public draw(context : CanvasRenderingContext2D){
-        context.drawImage(this.spriteSheet, 0, 0, 64, 32, 0, 0, 32, 32);
-
-    }
 
     public reset(context : CanvasRenderingContext2D){
         // black background
@@ -108,9 +107,11 @@ export default class DrawWorld{
 
     }
 
-    public getTileSprite(tileType:object): number[] {
-        // @ts-ignore
+    public getTileSprite(tileType:{tileType:string}): number[] {
+ 
+        
         const tileTypeConstant = TileTypeConstantToNumber(tileType.tileType);
+       
         const sprite = tileSprites.find((tileSprite) => tileSprite.key === tileTypeConstant);
         if (sprite) {
             return sprite.value;

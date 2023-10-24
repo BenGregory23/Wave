@@ -13,18 +13,6 @@ function game(context : CanvasRenderingContext2D){
 
 
     drawWorld.update(context);
-    
-
-
-
-        // add a window event listener to listen for key presses
-        window.addEventListener("keydown", (event) => {
-            //world.waveFunctionCollapse();
-            //drawWorld.update(context);
-        });
-  
-    
-    
     return {
         drawWorld,
         world,
@@ -83,9 +71,9 @@ const MapCanvas = () => {
         world?.waveFunctionCollapse();
         drawWorld?.update(context);
 
-
-        // loop 10 times 
-        for(let i = 0; i < 50; i++){
+        
+       
+        for(let i = 0; i < 510; i++){
             await new Promise(r => setTimeout(r, 0));
             world?.waveFunctionCollapse();
             drawWorld?.update(context);

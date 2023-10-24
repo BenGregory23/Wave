@@ -7,7 +7,6 @@ export default class World{
 
     private cols : number;
     private rows : number;
-
     private tiles : Tile[][] = [];
 
     constructor(sizeX: number, sizeY: number){
@@ -37,12 +36,7 @@ export default class World{
                     this.tiles[z][y].addNeighbor(this.tiles[z-1][y], WEST);
                 }
             }
-        }
-
-        console.log(this.tiles)
-
-       
-    
+        }    
     }
 
     public getEntropy(x:number,y:number){
