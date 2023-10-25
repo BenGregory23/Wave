@@ -37,6 +37,8 @@ export default class World{
                 }
             }
         }    
+
+        
     }
 
     public getEntropy(x:number,y:number){
@@ -100,7 +102,7 @@ export default class World{
         const tilesLowestEntropy = this.getTilesLowestEntropy()
 
         if(tilesLowestEntropy.length == 0){
-            console.log("No tiles with entropy > 0")
+            
             return true
         }
 

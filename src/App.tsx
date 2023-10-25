@@ -1,6 +1,7 @@
 import Header from "./components/Header"
 import MapCanvas from "./components/MapCanvas"
 import Controls from "./components/Controls"
+import { NextUIProvider } from "@nextui-org/react"
 
 
 function App() {
@@ -8,8 +9,11 @@ function App() {
 
   return (
     <>
-    <Header />
-    <MapCanvas/>
+    <NextUIProvider>
+      <Header />
+      <MapCanvas/>
+    </NextUIProvider>
+   
  
       
     </>

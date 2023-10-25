@@ -1,8 +1,26 @@
 export const spriteSheetPath = "src/assets/tileset.png"
 
+let isMobile = false
+
+if(window.innerWidth < 640){
+    isMobile = true
+}
+
+console.log(isMobile)
+
+// mobile world size in tiles
+export const MOBILE_WORLD_X = 19
+export const MOBILE_WORLD_Y = 25
+
 // World size in tiles
-export const WORLD_X = 60
-export const WORLD_Y = 34
+export const WORLD_X = isMobile ? MOBILE_WORLD_X : 60
+export const WORLD_Y = isMobile ? MOBILE_WORLD_Y : 34
+
+console.log(WORLD_X, WORLD_Y)
+
+
+
+
 
 // Tile size in pixels
 export const TILESIZE = 16

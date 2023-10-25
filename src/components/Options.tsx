@@ -1,4 +1,6 @@
-import { TILE_FOREST, tileWeights } from "../generator/config";
+import {Card, CardBody, Popover,PopoverTrigger, PopoverContent, CardFooter} from "@nextui-org/react";
+
+import { Info } from "lucide-react";
 
 const Options = ({showOptions, setGrass, setWater, setForest, setRock}) => {
 
@@ -6,39 +8,57 @@ const Options = ({showOptions, setGrass, setWater, setForest, setRock}) => {
         return null;
     }
     return(
-
-        <div className="absolute bottom-5 left-5 rounded-md flex flex-col justify-center items-center border-2 border-gray-800 bg-gray-800  w-1/3 h-36 p-3 py-5">
-            
-            <div className="flex flex-row justify-center items-center w-full">
-            <div className="flex flex-col m-2  w-1/2">
-                <div className="flex flex-col  justify-end w-full">
-                    <label className="text-white text-lg font-light  ">Grass</label>
-                    <input type="range" className="accent-white" min="0" max="100" step="1" defaultValue={16}  onChange={(e)=>{setGrass(e.target.value)}}/>
-                </div>
-                <div className="flex flex-col  justify-end">
-                    <label className="text-white text-lg  font-light  ">Water</label>
-                    <input type="range" className="accent-white" min="0" max="100" step="1" defaultValue={6} onChange={(e)=>{
-                     
-                        setWater(e.target.value)}}/>
-                </div>
+        
+        // how to put a div to an absolute position in the middle of the screen vertically
+        // https://stackoverflow.com/questions/8865458/how-do-i-center-an-element-horizontally-and-vertically-within-a-div-tag
+        <Card className="absolute top-1/2 left-6 transform -translate-y-1/2  flex flex-col justify-center items-center   lg:w-48 h-max ">
+            <CardBody className="w-full">
                 
-            </div>
-
-            <div className="flex flex-col m-2 w-1/2">
-                <div className="flex flex-col  justify-end">
-                    <label className="text-white text-lg font-light  ">Forest</label>
-                    <input type="range" className="accent-white " min="0" max="100" step="1" defaultValue={4}  onChange={(e)=>{setForest(e.target.value)}}/>
-                </div>
-                <div className="flex flex-col  justify-end">
-                    <label className="text-white text-lg font-light  ">Rock</label>
-                    <input type="range" className="accent-white " min="0" max="100" step="1" defaultValue={4} onChange={(e)=>{setRock(e.target.value)}}/>
-                </div>
+                    
+                        <div className="flex flex-col  justify-end w-full my-1">
+                            <label className="text-gray-800 text-lg font-light  ">Grass</label>
+                            <input type="range" className="accent-gray-800" min="0" max="100" step="1" defaultValue={16}  onChange={(e)=>{setGrass(e.target.value)}}/>
+                        </div>
+                        <div className="flex flex-col  justify-end my-1">
+                            <label className="text-gray-800 text-lg  font-light  ">Water</label>
+                            <input type="range" className="accent-gray-800" min="0" max="100" step="1" defaultValue={6} onChange={(e)=>{
+                            setWater(e.target.value)}}/>
+                        </div>
                 
-            </div>
+                 
 
-            </div>
+                    
+                        <div className="flex flex-col  justify-end my-1">
+                            <label className="text-gray-800 text-lg font-light  ">Forest</label>
+                            <input type="range" className="accent-gray-800 " min="0" max="100" step="1" defaultValue={4}  onChange={(e)=>{setForest(e.target.value)}}/>
+                        </div>
+                        <div className="flex flex-col  justify-end my-1">
+                            <label className="text-gray-800 text-lg font-light  ">Rock</label>
+                            <input type="range" className="accent-gray-800 " min="0" max="100" step="1" defaultValue={4} onChange={(e)=>{setRock(e.target.value)}}/>
+                        </div>
+                    
+                    
+
+         
             
-        </div>
+            </CardBody>
+            <CardFooter>
+                <Popover placement="right">
+                    <PopoverTrigger>
+                        <Info/>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                        <p className="p-2">These sliders control the amount of each tile that will be generated. <br/> The higher the value, the more of that tile will be generated.</p>
+                    </PopoverContent>
+                </Popover>
+            </CardFooter>
+     
+            
+         
+        </Card>
+            
+            
+        
     )
 }
 

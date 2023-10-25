@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Controls from "./Controls";
-import { WORLD_X, WORLD_Y, tileWeights } from "../generator/config";
+import { WORLD_X, WORLD_Y } from "../generator/config";
 import World from "../generator/classes/World";
 import DrawWorld from "../generator/classes/DrawWorld";
 import Options from "./Options";
@@ -11,9 +11,6 @@ import Options from "./Options";
 function game(context : CanvasRenderingContext2D){
     const world = new World(WORLD_X, WORLD_Y);
     const drawWorld = new DrawWorld(world, context);
-
-    
-
 
     drawWorld.update(context);
     return {
@@ -41,6 +38,7 @@ const MapCanvas = () => {
     const [water, setWater] = useState<number>(0);
     const [forest, setForest] = useState<number>(0);
     const [rock, setRock] = useState<number>(0);
+    const [runnning, setRunning] = useState<boolean>(false);
     
 
    
@@ -97,6 +95,9 @@ const MapCanvas = () => {
     }
 
     const start = async () => {
+        if(runnning){
+            return;
+        }
         const canvas = document.getElementById("mapCanvas") as HTMLCanvasElement;
         const context = canvas.getContext("2d");
         if (!context) {
@@ -106,17 +107,35 @@ const MapCanvas = () => {
         world?.waveFunctionCollapse();
         drawWorld?.update(context);
 
-        
-       
-        for(let i = 0; i < 2040; i++){
+        const loops = WORLD_X * WORLD_Y;
+        setRunning(true);
+        for(let i = 0; i < loops; i++){
+
             await new Promise(r => setTimeout(r, 0));
             
             world?.waveFunctionCollapse();
             drawWorld?.update(context);
         }
+        setRunning(false);
 
         
     }
+
+    //if mobile device
+    if(window.innerWidth < 640){
+     
+        return (
+            <div className="h-full  flex flex-col align-middle justify-center px-2">
+                     
+                <canvas className="border-2 border-gray-800" id="mapCanvas" width="300" height="400" >
+                </canvas>      
+                <Controls reset={reset} start={start} setShowOptions={setShowOptions} showOptions={showOptions}/>
+              
+            </div>
+    
+        )   
+    }
+
 
   
 
@@ -125,7 +144,7 @@ const MapCanvas = () => {
 
 
     return (
-        <div className="  ">
+        <div className="h-full">
             <div className="flex justify-center items-center">
             <canvas className="border-2 border-gray-800 " id="mapCanvas" width="960" height="544">
             </canvas>
