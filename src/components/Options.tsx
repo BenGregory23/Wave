@@ -1,8 +1,15 @@
 import {Card, CardBody, Popover,PopoverTrigger, PopoverContent, CardFooter} from "@nextui-org/react";
-
 import { Info } from "lucide-react";
 
-const Options = ({showOptions, setGrass, setWater, setForest, setRock}) => {
+interface OptionsProps {
+    showOptions: boolean;
+    setGrass: (value: number) => void;
+    setWater: (value: number) => void;
+    setForest: (value: number) => void;
+    setRock: (value: number) => void;
+}
+
+const Options = ({showOptions, setGrass, setWater, setForest, setRock}: OptionsProps) => {
 
     if(!showOptions){
         return null;
@@ -17,12 +24,12 @@ const Options = ({showOptions, setGrass, setWater, setForest, setRock}) => {
                     
                         <div className="flex flex-col  justify-end w-full my-1">
                             <label className="text-gray-800 text-lg font-light  ">Grass</label>
-                            <input type="range" className="accent-gray-800" min="0" max="100" step="1" defaultValue={16}  onChange={(e)=>{setGrass(e.target.value)}}/>
+                            <input type="range" className="accent-gray-800" min="0" max="100" step="1" defaultValue={16}  onChange={(e)=>{setGrass(Number(e.target.value))}}/>
                         </div>
                         <div className="flex flex-col  justify-end my-1">
                             <label className="text-gray-800 text-lg  font-light  ">Water</label>
                             <input type="range" className="accent-gray-800" min="0" max="100" step="1" defaultValue={6} onChange={(e)=>{
-                            setWater(e.target.value)}}/>
+                            setWater(Number(e.target.value))}}/>
                         </div>
                 
                  
@@ -30,11 +37,11 @@ const Options = ({showOptions, setGrass, setWater, setForest, setRock}) => {
                     
                         <div className="flex flex-col  justify-end my-1">
                             <label className="text-gray-800 text-lg font-light  ">Forest</label>
-                            <input type="range" className="accent-gray-800 " min="0" max="100" step="1" defaultValue={4}  onChange={(e)=>{setForest(e.target.value)}}/>
+                            <input type="range" className="accent-gray-800 " min="0" max="100" step="1" defaultValue={4}  onChange={(e)=>{setForest(Number(e.target.value))}}/>
                         </div>
                         <div className="flex flex-col  justify-end my-1">
                             <label className="text-gray-800 text-lg font-light  ">Rock</label>
-                            <input type="range" className="accent-gray-800 " min="0" max="100" step="1" defaultValue={4} onChange={(e)=>{setRock(e.target.value)}}/>
+                            <input type="range" className="accent-gray-800 " min="0" max="100" step="1" defaultValue={4} onChange={(e)=>{setRock(Number(e.target.value))}}/>
                         </div>
                     
                     

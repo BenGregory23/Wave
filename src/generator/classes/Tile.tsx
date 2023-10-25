@@ -4,7 +4,9 @@ import { randomChoice } from "../Random";
 
 export default class Tile {
 
+    // @ts-expect-error
     private x: number;
+    // @ts-expect-error
     private y: number;
     private entropy: number;
     private neighbors: Tile[] = [];

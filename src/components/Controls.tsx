@@ -1,6 +1,13 @@
 import { Button } from "@nextui-org/react";
 
-const Controls = ({start, reset, setShowOptions, showOptions }) => {
+interface ControlsProps {
+    start: () => void;
+    reset: () => void;
+    setShowOptions: (show: boolean) => void;
+    showOptions: boolean;
+  }
+
+const Controls = ({start, reset, setShowOptions, showOptions }: ControlsProps) => {
 
   
 

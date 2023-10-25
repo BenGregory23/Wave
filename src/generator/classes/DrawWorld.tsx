@@ -25,7 +25,7 @@ export default class DrawWorld{
 
  
     public update(context : CanvasRenderingContext2D){
-        const lowestEntropy = this.world.getLowestEntropy();
+        
        
 
         for(let y = 0; y < WORLD_Y; y++){
