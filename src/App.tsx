@@ -1,3 +1,4 @@
+import About from "./components/About"
 import Header from "./components/Header"
 import MapCanvas from "./components/MapCanvas"
 import { NextUIProvider } from "@nextui-org/react"
@@ -21,6 +22,7 @@ function App() {
     <NextUIProvider>
       <Header />
       <MapCanvas/>
+      <About/>
     </NextUIProvider>
    
  
